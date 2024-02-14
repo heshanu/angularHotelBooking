@@ -23,13 +23,16 @@ export class ReservationService {
   }
 
   public addReservation(reservation:Reservation):void{
+    reservation.id=Date.now().toString();
+
+    
     this.reservations.push(reservation);
     console.log(this.reservations);
     localStorage.setItem('reservations',JSON.stringify(this.reservations));
     
   }
 
-  public deleteReservation(id:number):void{
+  public deleteReservation(id:string):void{
     let index=this.reservations.findIndex((res:any)=>res.id===id);
     this.reservations.splice(index,1);
     localStorage.setItem('reservations',JSON.stringify(this.reservations));
