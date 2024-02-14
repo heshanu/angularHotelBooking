@@ -8,14 +8,14 @@ import { Reservation } from '../../../model/reservation';
   styleUrl: './reservation-list.component.css'
 })
 export class ReservationListComponent implements OnInit{
-
+  reservationList:Reservation[]=[];
   constructor(private reservationService:ReservationService){}
 
   ngOnInit(): void {
-    //this.reservationList=this.reservationService.
+    this.reservationList=this.reservationService.reservations;
   }
 
-  reservationList:Reservation[]=[];
+
 
 
 }
