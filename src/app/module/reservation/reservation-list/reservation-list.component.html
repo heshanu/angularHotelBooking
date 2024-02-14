@@ -1,1 +1,21 @@
-<p>reservation-list works!</p>
+<p class="text-center text-3xl bg-blue-200 m-4 p-4 text-blue-500">reservation-list works!</p>
+
+
+<ul *ngFor="let reservation of reservationList" class="m-4 p-4  bg-blue-200 max-w-md space-y-1 text-blue-500"> 
+    <li>
+        CheckInDate:{{reservation.checkInDate}}
+    </li>
+    <li>
+        CheckOutDate:{{reservation.checkOutDate}}
+    </li>
+    <li>
+        GuestName:{{reservation.guestName}}
+    </li>
+    <li>
+        GuestEmail:{{reservation.guestEmail}}
+    </li>
+    <li class="pb-4">
+        RoomNumber:{{reservation.roomNumber}}
+    </li>
+</ul>
+
