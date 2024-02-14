@@ -33,13 +33,14 @@ export class ReservationFormComponent implements OnInit{
 
     
 
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    let id= this.activatedRoute.snapshot.paramMap.get('id');
     if(id){
-      let reservatition=this.activatedRoute.snapshot.paramMap.get('id');
+      let reservatition=this.reservationService.getReservation(id);
 
       if(reservatition){
-        
-       // this.reservationForm.patchValue(reservatition);
+        //used to update and store prev values
+      this.reservationForm.patchValue(reservatition);    
+      
       }
     }
 
@@ -48,10 +49,17 @@ export class ReservationFormComponent implements OnInit{
   onSubmit() {
     if(this.reservationForm.valid){
       let reservation: Reservation = this.reservationForm.value;
-      this.reservationService.addReservation(reservation);
-      
-     // this.reservationsList=localStorage.getItem(JSON.parse('reservations'));  
 
+      let id= this.activatedRoute.snapshot.paramMap.get('id');
+      if(id){
+       //update
+       this.reservationService.updateReservation(id,reservation);
+      }else{
+        this.reservationService.addReservation(reservation);
+    
+      }
+
+    
       this.router.navigate(['/list']);
     }else{
       alert('Form is invalid');
