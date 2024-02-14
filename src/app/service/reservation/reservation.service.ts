@@ -6,11 +6,11 @@ import { Reservation } from '../../model/reservation';
 })
 export class ReservationService {
 
-  private reservations:Reservation[]=[];
+  reservations:Reservation[]=[];
 
   constructor() {
-    let savedReservation=localStorage.getItem(JSON.parse('reservations'));
-    this.reservations=savedReservation?JSON.parse(savedReservation):[];
+    let savedReservations=localStorage.getItem('reservations');
+    this.reservations=savedReservations?JSON.parse(savedReservations):[];
   }
 
   //curd
