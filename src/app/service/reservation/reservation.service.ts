@@ -29,7 +29,7 @@ export class ReservationService {
     
   }
 
-  public deleteReservation(id:string):void{
+  public deleteReservation(id:number):void{
     let index=this.reservations.findIndex((res:any)=>res.id===id);
     this.reservations.splice(index,1);
     localStorage.setItem('reservations',JSON.stringify(this.reservations));
