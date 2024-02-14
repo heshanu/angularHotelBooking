@@ -1,1 +1,98 @@
-<p>reservation-form works!</p>
+<h3 class="m-4 p-4 text-center text-blue-500 text-3xl bg-blue-50">Create a new Reservation</h3>
+
+<!-- <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Check-In Date:</label>
+            <input class="form-control" type="date" formControlName="checkInDate">
+            <small class="text-danger" *ngIf="reservationForm.get('checkInDate')?.invalid && reservationForm.get('checkInDate')?.touched">
+                Check-In Date is required.
+            </small>
+        </div>
+
+        <div class="col">
+            <label class="form-label">Check-Out Date:</label>
+            <input class="form-control" type="date" formControlName="checkOutDate">
+            <small class="text-danger" *ngIf="reservationForm.get('checkOutDate')?.invalid && reservationForm.get('checkOutDate')?.touched">
+                Check-Out Date is required.
+            </small>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Guest Name:</label>
+            <input class="form-control" type="text" formControlName="guestName">
+            <small class="text-danger" *ngIf="reservationForm.get('guestName')?.invalid && reservationForm.get('guestName')?.touched">
+                Guest Name is required.
+            </small>
+        </div>
+
+        <div class="col">
+            <label class="form-label">Guest Email:</label>
+            <input class="form-control" type="email" formControlName="guestEmail">
+            <small class="text-danger" *ngIf="reservationForm.get('guestEmail')?.invalid && reservationForm.get('guestEmail')?.touched">
+                Guest Email is required.
+            </small>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-3">
+            <label class="form-label">Room Number:</label>
+            <input class="form-control" type="number" formControlName="roomNumber">
+            <small class="text-danger" *ngIf="reservationForm.get('roomNumber')?.invalid && reservationForm.get('roomNumber')?.touched">
+                Room Number is required.
+            </small>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="reservationForm.invalid">Submit</button>
+</form> -->
+
+
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto">
+    <div class="mb-5">
+      <label for="username-success" class="block mb-2 text-sm font-medium text-blue-700 blue:text-blue-500">Check-In Date:</label>
+      <input type="date" formControlName="checkInDate" class="bg-blue-50 border border-blue-500 text-blue-900 placeholder-blue-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-blue-400" placeholder="Bonnie Green">
+      <p *ngIf="reservationForm.get('checkInDate')?.invalid && reservationForm.get('checkInDate')?.touched"  class="mt-2 text-sm text-red-600 dark:text-red-500">Check-In Date is required!</p>
+    </div>
+
+    <div class="mb-5">
+        <label for="username-success" class="block mb-2 text-sm font-medium text-blue-700 dark:text-blue-500">Check-Out Date:</label>
+        <input type="date" formControlName="checkOutDate" class="bg-blue-50 border border-blue-500 text-blue-900 placeholder-blue-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:borderblue-400" placeholder="Bonnie Green">
+        <p *ngIf="reservationForm.get('checkOutDate')?.invalid && reservationForm.get('checkOutDate')?.touched"  class="mt-2 text-sm text-red-600 dark:text-red-500">Check-Out Date is required!</p>
+    </div>
+
+    <div class="mb-5">
+        <label for="username-success" class="block mb-2 text-sm font-medium text-blue-700 dark:text-blue-500">Guest Name:</label>
+        <input type="text" formControlName="guestName" class="bg-blue-50 border border-blue-500 text-blue-900 placeholder-blue-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-blue-400" placeholder="Bonnie Green">
+        <p *ngIf="reservationForm.get('guestName')?.invalid && reservationForm.get('guestName')?.touched"  class="mt-2 text-sm text-red-600 dark:text-red-500">Guest name is required!</p>
+    </div>
+
+    <div class="mb-5">
+        <label for="username-success" class="block mb-2 text-sm font-medium text-blue-700 dark:text-blue-500">Guest Email</label>
+        <input type="text" formControlName="guestEmail" class="bg-blue-50 border border-blue-500 text-blue-900 placeholder-blue-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-blue-400" placeholder="BonnieGreen@gmail.com">
+        <p *ngIf="reservationForm.get('guestName')?.invalid && reservationForm.get('guestEmail')?.touched"  class="mt-2 text-sm text-red-600 dark:text-red-500">Guest email is required!</p>
+    </div>
+
+    <div class="mb-5">
+        <label for="username-success" class="block mb-2 text-sm font-medium text-blue-700 dark:text-blue-500">Room Number:</label>
+        <input type="number" formControlName="roomNumber" 
+        class="bg-blue-50 border border-blue-500 text-blue-900 placeholder-blue-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-blue-100 dark:border-blue-400" placeholder="101"
+        
+        [ngClass]="reservationForm.get('roomNumber')?.touched && reservationForm.get('roomNumber')?.invalid? 
+        'ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400'
+        :'bg-blue-50 border border-blue-500 text-blue-900 placeholder-blue-700 text-sm rounded-lg focus'" placeholder="101">
+         
+        <p *ngIf="reservationForm.get('roomNumber')?.touched && reservationForm.get('roomNumber')?.invalid"  class="mt-2 text-sm text-red-600 dark:text-red-500">Guest room number is required!</p>
+    </div>
+  
+    <button class="bg-blue-500 rounded-md p-4 m-4" type="submit" [disabled]="reservationForm.invalid">Submit</button>
+</form>
+
+
+
+
+  
