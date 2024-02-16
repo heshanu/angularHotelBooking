@@ -18,24 +18,20 @@ export class ReservationService {
     return this.http.get<Reservation[]>(this.apiUrl+"reservations");
   } 
 
-  public getReservation(id:string):Reservation|undefined{
-    return this.reservations.find((res:any)=> res.id===id);
+  public getReservation(id:string):Observable<Reservation>{
+    return this.http.get<Reservation>(this.apiUrl+"reservation/"+id);
+  } 
+
+  public addReservation(reservation:Reservation):Observable<Reservation>{
+    return this.http.post<Reservation>(this.apiUrl+"reservation/",reservation);
   }
 
-  public addReservation(reservation:Reservation):void{
-    reservation.id=Date.now().toString();   
-    this.reservations.push(reservation);
-    console.log(this.reservations); 
+  public deleteReservation(id:string):Observable<void>{
+    return this.http.delete<void>(this.apiUrl+"reservation/"+id);
   }
 
-  public deleteReservation(id:string):void{
-    let index=this.reservations.findIndex((res:any)=>res.id===id);
-    this.reservations.splice(index,1);
-  }
-
-  public updateReservation(id:string,uploadReservation:Reservation):void{
-    let index=this.reservations.findIndex((res:any)=>res.id===id);
-    this.reservations[index]=uploadReservation;
+  public updateReservation(id:string,uploadReservation:Reservation):Observable<void>{
+    return this.http.put<void>(this.apiUrl+"reservation/"+id,uploadReservation);
   }
 
 

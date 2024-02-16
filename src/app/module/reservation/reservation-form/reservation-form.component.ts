@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Reservation } from '../../../model/reservation';
 import { ReservationService } from '../../../service/reservation/reservation.service';
+import { log } from 'node:console';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ReservationFormComponent implements OnInit{
     private reservationService:ReservationService){
 
   }
+
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
       checkInDate: ['', Validators.required],
@@ -31,41 +33,41 @@ export class ReservationFormComponent implements OnInit{
       roomNumber: ['', Validators.required]
     })
 
-    
+    let id = this.activatedRoute.snapshot.paramMap.get('id')
 
-    let id= this.activatedRoute.snapshot.paramMap.get('id');
     if(id){
-      let reservatition=this.reservationService.getReservation(id);
+      let reservation = this.reservationService.getReservation(id)
 
-      if(reservatition){
-        //used to update and store prev values
-      this.reservationForm.patchValue(reservatition);    
-      
+      if(reservation){
+        this.reservationForm.patchValue(reservation);
       }
     }
-
   }
 
   onSubmit() {
     if(this.reservationForm.valid){
+
       let reservation: Reservation = this.reservationForm.value;
 
-      let id= this.activatedRoute.snapshot.paramMap.get('id');
+      let id = this.activatedRoute.snapshot.paramMap.get('id')
+
       if(id){
-       //update
-       this.reservationService.updateReservation(id,reservation);
-      }else{
-        this.reservationService.addReservation(reservation);    
+        // Update
+        this.reservationService.updateReservation(id, reservation).subscribe((res)=>{
+          console.log("updated!");
+          
+        })
+      } else {
+        // New
+        this.reservationService.addReservation(reservation).subscribe((res:Reservation)=>{
+          console.log('Inserted!');
+        })   
+
       }
-      this.router.navigate(['/list']);
-    }else{
-      alert('Form is invalid');
+
+      this.router.navigate(['/list'])
     }
-    this.reservationForm.reset();
-  }
-
-
-  
+  }  
   
   }
 
