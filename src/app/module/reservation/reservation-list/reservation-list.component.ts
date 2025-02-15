@@ -8,13 +8,15 @@ import { Reservation } from '../../../model/reservation';
   styleUrl: './reservation-list.component.css'
 })
 export class ReservationListComponent implements OnInit{
-  reservationList:Reservation[]=[];
+  reservationList!:Reservation[];
+
   constructor(private reservationService:ReservationService){}
 
   ngOnInit(): void {
-    this.reservationService.getReservations().subscribe((reservation)=>{
-          this.reservationList=reservation;
-    });
+    // this.reservationService.getReservations().subscribe((reservation)=>{
+    //       this.reservationList=reservation;
+    // });
+    this.reservationList=this.reservationService.getReservations();
   }
 
   public deleteReservation(id:string){
